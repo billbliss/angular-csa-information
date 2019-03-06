@@ -1,0 +1,71 @@
+<div *ngIf="cloudServiceEntry; else elseBlock">
+  <h2>Registry Entry Details</h2>
+  <p>Name: {{cloudServiceEntry.name}}</p>
+  <div [innerHTML]="htmlStrDesc"></div>
+  <div [innerHTML]="htmlStrOrgDesc"></div>
+
+  <div *ngIf="singleEntryData; else showDataBlock">
+    <p>Assessment Type: {{singleEntryData.type}}</p>
+    <p>Specification Name: {{singleEntryData.specification_name}}</p>
+  
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Choose CAIQ Control" [(ngModel)]="selectedControl" name="control">
+          <mat-option *ngFor="let control of controlData" [value]="control.control_id"
+            (onSelectionChange)="onTitleChanged($event)">
+            {{control.title}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="caiqAssessmentDetails; else dneBlock">
+        <table mat-table [dataSource]="caiqAssessmentDetails" matSort matSortActive="created" matSortDisableClear
+            matSortDirection="desc">
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+                <td mat-cell *matCellDef="let row">{{row.title}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="question_id">
+                <th mat-header-cell *matHeaderCellDef>Question ID</th>
+                <td mat-cell *matCellDef="let row">{{row.question_id}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="question">
+                <th mat-header-cell *matHeaderCellDef>Question</th>
+                <td mat-cell *matCellDef="let row">{{row.question}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="response">
+                <th mat-header-cell *matHeaderCellDef>Response</th>
+                <td mat-cell *matCellDef="let row">{{row.response}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="comment">
+                <th mat-header-cell *matHeaderCellDef disableClear>
+                    Comment
+                </th>
+                <td mat-cell *matCellDef="let row">{{row.comment}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="caiqDetailColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: caiqDetailColumns;"></tr>
+        </table>
+
+        <a class="button-like" href="#home">Home</a>
+    </div>
+    <ng-template #dneBlock>
+        <p class="info-not-exist">No details</p>
+        <a class="button-like" href="#home">Home</a>
+    </ng-template>
+  </div>
+  <ng-template #showDataBlock>
+    <p class="info-not-exist">CAIQ information cannot be found</p>
+    <a class="button-like" href="#home">Home</a>
+  </ng-template>
+</div>
+<ng-template #elseBlock>
+  <p class="info-not-exist">Cloud Service data is not found</p>
+  <a class="button-like" href="#home">Home</a>
+</ng-template>
