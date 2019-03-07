@@ -26,8 +26,8 @@ export class DetailsComponent implements OnInit {
 
   selectedId: number;
   selectedName: string;
-  htmlStrDesc: string;
-  htmlStrOrgDesc: string;
+  htmlStrDesc: string = '';
+  htmlStrOrgDesc: string = '';
   displayedColumns: string[] = ['id', 'type', 'specification_name', 'specification_url', 'asset_url', 'created_at'];
   caiqDetailColumns: string[] = ['title', 'question_id', 'question', 'response', 'comment'];
 
@@ -51,8 +51,8 @@ export class DetailsComponent implements OnInit {
 
       this.regEntryData = this.cloudServiceEntry.registry_entries;
 
-      this.htmlStrDesc = this.cloudServiceEntry.description;
-      this.htmlStrOrgDesc = this.cloudServiceEntry.organization_description;
+      this.htmlStrDesc = this.cloudServiceEntry.description !== "" ? this.cloudServiceEntry.description : "";
+      this.htmlStrOrgDesc = this.cloudServiceEntry.organization_description !== '' ? this.cloudServiceEntry.organization_description : "";
 
       var filteredEntryData = this.regEntryData.filter(data => data.specification_name == environment.specificationFilter);
 
@@ -110,7 +110,28 @@ export class DetailsComponent implements OnInit {
       console.log(this.selectedControlId);
 
         if (this.selectedControlId === '1') {
-          console.log('Have to get all the data'); 
+          console.log('Getting all the data'); 
+          console.log(this.controlData);
+
+          this.caiqAssessmentDetails = []; 
+
+          for (var i = 0; i < this.controlData.length; i++) {
+            let currentQuestions = [];
+            currentQuestions = this.controlData[i].questions; 
+            for (var j = 0; j < currentQuestions.length; j++) {
+              var newObj: any = {};
+
+              var response = this.caiqAssessment.responses.filter(x => x.question_id == currentQuestions[j].question_id);
+
+              newObj.title = this.controlData[i].title;
+              newObj.question = currentQuestions[j].description;
+              newObj.question_id = currentQuestions[j].question_id;
+              newObj.response = response[0].answer;
+              newObj.comment = response[0].comment;
+
+              this.caiqAssessmentDetails.push(newObj); 
+            }
+          }
         } else {
           var filteredControlData = this.controlData.filter(x => x.control_id == this.selectedControlId);
           var filteredQuestions = filteredControlData[0].questions;
