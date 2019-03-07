@@ -6,7 +6,12 @@
 
   <div *ngIf="singleEntryData; else showDataBlock">
     <p>Assessment Type: {{singleEntryData.type}}</p>
-    <p>Specification Name: {{singleEntryData.specification_name}}</p>
+    <div *ngIf="singleEntryData.asset_url; else noAssetUrl">
+        <p>Specification Name: <a href="{{singleEntryData.asset_url}}">{{singleEntryData.specification_name}}</a></p>
+    </div>
+    <ng-template #noAssetUrl>
+        <p>Specification Name: {{singleEntryData.specification_name}}</p>
+    </ng-template>
   
     <div>
       <mat-form-field>
