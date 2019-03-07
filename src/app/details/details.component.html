@@ -26,9 +26,9 @@
 
     <div *ngIf="caiqAssessmentDetails; else dneBlock">
         <table class="table">
-          <thead>
+          <thead class="thead-dark">
             <tr>
-              <th scope="col">Title</th>
+              <th scope="col" *ngIf="selectedControlId === '1'; else noTitleBlock">Title</th><ng-template #noTitleBlock></ng-template>
               <th scope="col">Question</th>
               <th scope="col">Response</th>
               <th scope="col">Comment</th>
@@ -37,7 +37,7 @@
           </thead>
           <tbody *ngFor="let item of caiqAssessmentDetails">
             <tr>
-              <td>{{item.title}}</td>
+              <td *ngIf="selectedControlId === '1'; else noTitleBlock">{{item.title}}</td><ng-template #noTitleBlock></ng-template>
               <td>{{item.question}}</td>
               <td>{{item.response}}</td>
               <td>{{item.comment}}</td>

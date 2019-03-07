@@ -20,6 +20,9 @@ export class DetailsComponent implements OnInit {
   caiqAssessment: CaiqAssessment;
   caiqAssessmentDetails: CaiqAssessmentDetail[];
   controlData: Control[];
+  
+  currentHeaderStyles = {};
+  selectedControlId: string;
 
   selectedId: number;
   selectedName: string;
@@ -81,6 +84,17 @@ export class DetailsComponent implements OnInit {
           this.controlData.push(tempControl); 
         }
       });
+      
+      var allControl = {
+        control_id: '1',
+        title: 'All',
+        description: 'Showing all of the data',
+        questions: []
+      };
+  
+      if (this.controlData.length > 1) {
+        this.controlData.push(allControl);
+      }
     });
   }
 
@@ -92,29 +106,33 @@ export class DetailsComponent implements OnInit {
 
   onTitleChanged(event) {
     if(event.isUserInput) {
-      const selectedControlId = event.source.value;
-      console.log(selectedControlId);
+      this.selectedControlId = event.source.value;
+      console.log(this.selectedControlId);
 
-      var filteredControlData = this.controlData.filter(x => x.control_id == selectedControlId);
-      var filteredQuestions = filteredControlData[0].questions;
+        if (this.selectedControlId === '1') {
+          console.log('Have to get all the data'); 
+        } else {
+          var filteredControlData = this.controlData.filter(x => x.control_id == this.selectedControlId);
+          var filteredQuestions = filteredControlData[0].questions;
 
-      this.caiqAssessmentDetails = [];
+          this.caiqAssessmentDetails = [];
        
-      for (var k = 0; k < filteredQuestions.length; k++) {
-        var newObject: any = {};
+          for (var k = 0; k < filteredQuestions.length; k++) {
+            var newObject: any = {};
 
-        var filteredResponse = this.caiqAssessment.responses.filter(x => x.question_id == filteredQuestions[k].question_id);
+            var filteredResponse = this.caiqAssessment.responses.filter(x => x.question_id == filteredQuestions[k].question_id);
 
-        newObject.title = filteredControlData[0].title;
-        newObject.question = filteredQuestions[k].description;
-        newObject.question_id = filteredQuestions[k].question_id;
-        newObject.response = filteredResponse[0].answer;
-        newObject.comment = filteredResponse[0].comment;
+            newObject.title = filteredControlData[0].title;
+            newObject.question = filteredQuestions[k].description;
+            newObject.question_id = filteredQuestions[k].question_id;
+            newObject.response = filteredResponse[0].answer;
+            newObject.comment = filteredResponse[0].comment;
 
-        this.caiqAssessmentDetails.push(newObject); 
-      }
+            this.caiqAssessmentDetails.push(newObject); 
+          }
 
-      console.log(this.caiqAssessmentDetails);
+          console.log(this.caiqAssessmentDetails);
+        }
     }
   }
 }
