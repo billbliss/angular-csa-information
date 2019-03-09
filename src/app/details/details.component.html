@@ -5,52 +5,57 @@
   <div [innerHTML]="htmlStrOrgDesc"></div>
 
   <div *ngIf="singleEntryData; else showDataBlock">
-    <p>Assessment Type: {{singleEntryData.type}}</p>
+    <p>Assessment Type: <a href="https://cloudsecurityalliance.org/star/#_overview">{{singleEntryData.type}}</a></p>
     <div *ngIf="singleEntryData.asset_url; else noAssetUrl">
-        <p>Specification Name: <a href="{{singleEntryData.asset_url}}">{{singleEntryData.specification_name}}</a></p>
+      <p>Specification Name: <a href="{{singleEntryData.asset_url}}">{{singleEntryData.specification_name}}</a></p>
     </div>
     <ng-template #noAssetUrl>
-        <p>Specification Name: {{singleEntryData.specification_name}}</p>
+      <p>Specification Name: {{singleEntryData.specification_name}}</p>
     </ng-template>
-  
-    <div>
-      <mat-form-field>
-        <mat-select placeholder="Choose CAIQ Control" [(ngModel)]="selectedControl" name="control">
-          <mat-option *ngFor="let control of controlData" [value]="control.control_id"
-            (onSelectionChange)="onTitleChanged($event)">
-            {{control.title}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Select CAIQ Control:</span>
+      </div>
+      <div class="custom-select" id="inputGroupSelect01">
+          <mat-select [(ngModel)]="selectedControl" name="control">
+            <mat-option *ngFor="let control of controlData" [value]="control.control_id"
+              (onSelectionChange)="onTitleChanged($event)">
+              {{control.title}}
+            </mat-option>
+          </mat-select>
+      </div>
     </div>
 
     <div *ngIf="caiqAssessmentDetails; else dneBlock">
-        <table class="table">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col" *ngIf="selectedControlId === '1'; else noTitleBlock">Title</th><ng-template #noTitleBlock></ng-template>
-              <th scope="col">Question</th>
-              <th scope="col">Response</th>
-              <th scope="col">Comment</th>
-              <th scope="col">Question ID</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let item of caiqAssessmentDetails">
-            <tr>
-              <td *ngIf="selectedControlId === '1'; else noTitleBlock">{{item.title}}</td><ng-template #noTitleBlock></ng-template>
-              <td>{{item.question}}</td>
-              <td>{{item.response}}</td>
-              <td>{{item.comment}}</td>
-              <td>{{item.question_id}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" *ngIf="selectedControlId === '1'; else noTitleBlock">Title</th>
+            <ng-template #noTitleBlock></ng-template>
+            <th scope="col">Question ID</th>
+            <th scope="col">Question</th>
+            <th scope="col">Response</th>
+            <th scope="col">Comment</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let item of caiqAssessmentDetails">
+          <tr>
+            <td *ngIf="selectedControlId === '1'; else noTitleBlock">{{item.title}}</td>
+            <ng-template #noTitleBlock></ng-template>
+            <td>{{item.question_id}}</td>
+            <td>{{item.question}}</td>
+            <td>{{item.response}}</td>
+            <td>{{item.comment}}</td>
+          </tr>
+        </tbody>
+      </table>
 
-        <!-- <a class="button-like" href="#home">Home</a> -->
+      <!-- <a class="button-like" href="#home">Home</a> -->
     </div>
     <ng-template #dneBlock>
-        <p class="info-not-exist">No details</p>
-        <!-- <a class="button-like" href="#home">Home</a> -->
+      <p class="info-not-exist">No details</p>
+      <!-- <a class="button-like" href="#home">Home</a> -->
     </ng-template>
   </div>
   <ng-template #showDataBlock>
