@@ -2,15 +2,15 @@
   <div *ngIf="singleEntryData; else showDataBlock">
     <p>Assessment Type: <a href="https://cloudsecurityalliance.org/star/#_overview">{{singleEntryData.type}}</a></p>
     <div *ngIf="singleEntryData.asset_url; else noAssetUrl">
-      <p>Download link for responses: <a href="{{singleEntryData.asset_url}}">{{singleEntryData.specification_name}}</a></p>
+      <a href="{{singleEntryData.asset_url}}">Download partner responses</a>
     </div>
     <ng-template #noAssetUrl>
       <p>Specification Name: {{singleEntryData.specification_name}}</p>
     </ng-template>
 
-    <div class="input-group mb-3">
+    <div class="input-group mb-3" style="padding-top: 35px;">
       <div id="inputGroupSelect01" style="width: 100%;"> 
-          <mat-select [(ngModel)]="selectedControl" name="control" placeholder="Select CAIQ Control">
+          <mat-select [(ngModel)]="selectedControl" name="control" placeholder="Select control category">
             <mat-option *ngFor="let control of controlData" [value]="control.control_id"
               (onSelectionChange)="onTitleChanged($event)" disableOptionCentering>
               {{control.title}}
