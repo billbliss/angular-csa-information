@@ -1,4 +1,4 @@
-<div class="container" *ngIf="cloudServiceEntry; else elseBlock">
+<div *ngIf="cloudServiceEntry; else elseBlock" style="padding-top: 50px;">
   <div *ngIf="singleEntryData; else showDataBlock">
     <p>Assessment Type: <a href="https://cloudsecurityalliance.org/star/#_overview">{{singleEntryData.type}}</a></p>
     <div *ngIf="singleEntryData.asset_url; else noAssetUrl">
@@ -8,15 +8,15 @@
       <p>Specification Name: {{singleEntryData.specification_name}}</p>
     </ng-template>
 
-    <div class="input-group mb-3" style="padding-top: 35px;">
-      <div id="inputGroupSelect01" style="width: 100%;"> 
-          <mat-select [(ngModel)]="selectedControl" name="control" placeholder="Select control category">
+    <div style="padding-top: 35px;">
+      <mat-form-field appearance="outline" style="width: 100%; height: 80px;">
+          <mat-select [(ngModel)]="selectedControl" name="control" placeholder="Select control category" style="width: 100%;">
             <mat-option *ngFor="let control of controlData" [value]="control.control_id"
-              (onSelectionChange)="onTitleChanged($event)" disableOptionCentering>
+              (onSelectionChange)="onTitleChanged($event)">
               {{control.title}}
             </mat-option>
           </mat-select>
-      </div>
+        </mat-form-field>
     </div>
 
     <div *ngIf="caiqAssessmentDetails; else dneBlock">

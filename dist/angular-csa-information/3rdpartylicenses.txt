@@ -62,6 +62,8 @@ THE SOFTWARE.
 
 @angular/material/core
 
+@angular/material/form-field
+
 @angular/material/select
 
 @angular/material/table
