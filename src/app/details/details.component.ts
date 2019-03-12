@@ -92,8 +92,9 @@ export class DetailsComponent implements OnInit {
         questions: []
       };
   
+      // Moving the All option to the top
       if (this.controlData.length > 1) {
-        this.controlData.push(allControl);
+        this.controlData.unshift(allControl);
       }
     });
   }

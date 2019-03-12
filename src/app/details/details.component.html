@@ -1,26 +1,18 @@
-<div *ngIf="cloudServiceEntry; else elseBlock">
-  <h2>Registry Entry Details</h2>
-  <p>Name: {{cloudServiceEntry.name}}</p>
-  <div [innerHTML]="htmlStrDesc"></div>
-  <div [innerHTML]="htmlStrOrgDesc"></div>
-
+<div class="container" *ngIf="cloudServiceEntry; else elseBlock">
   <div *ngIf="singleEntryData; else showDataBlock">
     <p>Assessment Type: <a href="https://cloudsecurityalliance.org/star/#_overview">{{singleEntryData.type}}</a></p>
     <div *ngIf="singleEntryData.asset_url; else noAssetUrl">
-      <p>Specification Name: <a href="{{singleEntryData.asset_url}}">{{singleEntryData.specification_name}}</a></p>
+      <p>Download link for responses: <a href="{{singleEntryData.asset_url}}">{{singleEntryData.specification_name}}</a></p>
     </div>
     <ng-template #noAssetUrl>
       <p>Specification Name: {{singleEntryData.specification_name}}</p>
     </ng-template>
 
     <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-default">Select CAIQ Control:</span>
-      </div>
-      <div class="custom-select" id="inputGroupSelect01">
-          <mat-select [(ngModel)]="selectedControl" name="control">
+      <div id="inputGroupSelect01" style="width: 100%;"> 
+          <mat-select [(ngModel)]="selectedControl" name="control" placeholder="Select CAIQ Control">
             <mat-option *ngFor="let control of controlData" [value]="control.control_id"
-              (onSelectionChange)="onTitleChanged($event)">
+              (onSelectionChange)="onTitleChanged($event)" disableOptionCentering>
               {{control.title}}
             </mat-option>
           </mat-select>
@@ -30,7 +22,7 @@
     <div *ngIf="caiqAssessmentDetails; else dneBlock">
       <table class="table">
         <thead class="thead-dark">
-          <tr>
+          <tr *ngIf="selectedControlId === '1'; else normalBlock">
             <th scope="col" *ngIf="selectedControlId === '1'; else noTitleBlock">Title</th>
             <ng-template #noTitleBlock></ng-template>
             <th scope="col">Question ID</th>
@@ -38,9 +30,17 @@
             <th scope="col">Response</th>
             <th scope="col">Comment</th>
           </tr>
+          <ng-template #normalBlock>
+              <th scope="col" *ngIf="selectedControlId === '1'; else noTitleBlock">Title</th>
+              <ng-template #noTitleBlock></ng-template>
+              <th scope="col">Question</th>
+              <th scope="col">Response</th>
+              <th scope="col">Question ID</th>
+              <th scope="col">Comment</th>
+          </ng-template>
         </thead>
         <tbody *ngFor="let item of caiqAssessmentDetails">
-          <tr>
+          <tr *ngIf="selectedControlId === '1'; else normal">
             <td *ngIf="selectedControlId === '1'; else noTitleBlock">{{item.title}}</td>
             <ng-template #noTitleBlock></ng-template>
             <td>{{item.question_id}}</td>
@@ -48,6 +48,14 @@
             <td>{{item.response}}</td>
             <td>{{item.comment}}</td>
           </tr>
+          <ng-template #normal>
+              <td *ngIf="selectedControlId === '1'; else noTitleBlock">{{item.title}}</td>
+              <ng-template #noTitleBlock></ng-template>
+              <td>{{item.question}}</td>
+              <td>{{item.response}}</td>
+              <td>{{item.question_id}}</td>
+              <td>{{item.comment}}</td>
+          </ng-template>
         </tbody>
       </table>
 
