@@ -2,7 +2,7 @@
   <div *ngIf="singleEntryData; else showDataBlock">
     <p>Assessment Type: <a href="https://cloudsecurityalliance.org/star/#_overview" target="_blank">{{singleEntryData.type}}</a></p>
     <div *ngIf="singleEntryData.asset_url; else noAssetUrl">
-      <a href="{{singleEntryData.asset_url}}">Download partner responses</a>
+      <a href="{{singleEntryData.asset_url}}">Download complete assessment</a>
     </div>
     <ng-template #noAssetUrl>
       <p>Specification Name: {{singleEntryData.specification_name}}</p>
