@@ -8,7 +8,10 @@
       <p>Specification Name: {{singleEntryData.specification_name}}</p>
     </ng-template>
 
-    <div style="padding-top: 20px;">
+    <div style="padding-top: 20px;" class="input-group mb-3">
+      <div class="input-group-prepend" style="height: 62px;">
+        <span class="input-group-text">Control Category</span>
+      </div>
       <mat-form-field appearance="fill" style="width: 50%;">
         <mat-select [(ngModel)]="selectedControl" name="control" placeholder="Please select a control category" style="height: 20px;" 
                     disableOptionCentering="true">
@@ -55,7 +58,7 @@
       <!-- <a class="button-like" href="#home">Home</a> -->
     </div>
     <ng-template #dneBlock>
-      <p>Please select a control category from the dropdown above</p>
+      <p></p>
       <!-- <a class="button-like" href="#home">Home</a> -->
     </ng-template>
   </div>
