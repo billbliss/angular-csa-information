@@ -26,10 +26,10 @@
           <tr *ngIf="selectedControlId === '1'; else normalBlock">
             <th scope="col" *ngIf="selectedControlId === '1'; else noTitleBlock">Control Category</th>
             <ng-template #noTitleBlock></ng-template>
-            <th scope="col">Question ID</th>
             <th scope="col">Question</th>
             <th scope="col">Response</th>
             <th scope="col">Comment</th>
+            <th scope="col">Question ID</th>
           </tr>
           <ng-template #normalBlock>
             <th scope="col" *ngIf="selectedControlId === '1'; else noTitleBlock">Control Category</th>
@@ -41,22 +41,14 @@
           </ng-template>
         </thead>
         <tbody *ngFor="let item of caiqAssessmentDetails">
-          <tr *ngIf="selectedControlId === '1'; else normal">
+          <tr>
             <td *ngIf="selectedControlId === '1'; else noTitleBlock">{{item.title}}</td>
             <ng-template #noTitleBlock></ng-template>
-            <td>{{item.question_id}}</td>
             <td>{{item.question}}</td>
             <td>{{item.response}}</td>
             <td>{{item.comment}}</td>
+            <td>{{item.question_id}}</td>
           </tr>
-          <ng-template #normal>
-            <td *ngIf="selectedControlId === '1'; else noTitleBlock">{{item.title}}</td>
-            <ng-template #noTitleBlock></ng-template>
-            <td>{{item.question}}</td>
-            <td>{{item.response}}</td>
-            <td>{{item.comment}}</td>
-            <td>{{item.question_id}}</td>
-          </ng-template>
         </tbody>
       </table>
 
