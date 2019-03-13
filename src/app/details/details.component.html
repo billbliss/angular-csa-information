@@ -5,7 +5,7 @@
       <a href="{{singleEntryData.asset_url}}">Download complete assessment</a>
     </div>
     <ng-template #noAssetUrl>
-      <p>Specification Name: {{singleEntryData.specification_name}}</p>
+      <p>Complete assessment download not available</p>
     </ng-template>
 
     <div style="padding-top: 20px;" class="input-group mb-3">
@@ -13,7 +13,7 @@
         <span class="input-group-text">Control Category</span>
       </div>
       <mat-form-field appearance="fill" style="width: 50%;">
-        <mat-select [(ngModel)]="selectedControl" name="control" placeholder="Please select a control category" style="height: 20px;" 
+        <mat-select [(ngModel)]="selectedControl" name="control" style="height: 20px;" 
                     disableOptionCentering="true">
           <mat-option *ngFor="let control of controlData" [value]="control.control_id"
             (onSelectionChange)="onTitleChanged($event)">

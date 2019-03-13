@@ -30,3 +30,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 In order for you to get this code working in CodePen, please follow the below steps: 
 
 1. Run `ng build --prod` this will enable a production build and all the build artifacts are stored in the `dist/angular-csa-information` directory.
+2. On CodePen.io - create a new project for your account
