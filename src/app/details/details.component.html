@@ -1,6 +1,6 @@
-<div *ngIf="cloudServiceEntry; else elseBlock" style="padding-top: 50px;">
+<div *ngIf="cloudServiceEntry; else elseBlock" style="padding-top: 15px;">
   <div *ngIf="singleEntryData; else showDataBlock">
-    <p>Assessment Type: <a href="https://cloudsecurityalliance.org/star/#_overview">{{singleEntryData.type}}</a></p>
+    <p>Assessment Type: <a href="https://cloudsecurityalliance.org/star/#_overview" target="_blank">{{singleEntryData.type}}</a></p>
     <div *ngIf="singleEntryData.asset_url; else noAssetUrl">
       <a href="{{singleEntryData.asset_url}}">Download partner responses</a>
     </div>

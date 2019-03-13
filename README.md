@@ -25,3 +25,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## CodePen Instructions
+In order for you to get this code working in CodePen, please follow the below steps: 
+
+1. Run `ng build --prod` this will enable a production build and all the build artifacts are stored in the `dist/angular-csa-information` directory.

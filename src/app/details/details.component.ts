@@ -38,7 +38,7 @@ export class DetailsComponent implements OnInit {
       this.selectedId = parseInt(params['id']);
       this.selectedName = params['name'];
 
-      this.getRegistryEntryDetail(this.selectedId); 
+      this.getRegistryEntryDetail(this.selectedId);
     });
   }
 
