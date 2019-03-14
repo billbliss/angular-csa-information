@@ -20,7 +20,7 @@ export class DetailsComponent implements OnInit {
   caiqAssessment: CaiqAssessment;
   caiqAssessmentDetails: CaiqAssessmentDetail[];
   controlData: Control[];
-  selectedControl: Control; 
+  selectedControl: string; 
 
   currentHeaderStyles = {};
   selectedControlId: string;
