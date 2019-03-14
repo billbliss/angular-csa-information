@@ -103,7 +103,10 @@ export class DetailsComponent implements OnInit {
 
   getCaiqAssessmentInfo(id: number) {
     this.csaDataService.getCaiqAssessment(id).subscribe(result => {
-      this.caiqAssessment = result;
+      console.log('Getting the CAIQ Assessment: ' + id); 
+      if (result != null) {
+        this.caiqAssessment = result;
+      }
     })
   }
 
