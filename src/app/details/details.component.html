@@ -14,7 +14,7 @@
       </div>
       <mat-form-field appearance="fill" style="width: 50%;">
         <mat-select [(ngModel)]="selectedControl" name="control" style="height: 20px;" 
-                    disableOptionCentering="true">
+                    disableOptionCentering="true" selected="selectedControl">
           <mat-option *ngFor="let control of controlData" [value]="control.control_id"
             (onSelectionChange)="onTitleChanged($event)">
             {{control.title}}

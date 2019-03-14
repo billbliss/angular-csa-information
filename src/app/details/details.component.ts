@@ -20,6 +20,7 @@ export class DetailsComponent implements OnInit {
   caiqAssessment: CaiqAssessment;
   caiqAssessmentDetails: CaiqAssessmentDetail[];
   controlData: Control[];
+  selectedControl: Control; 
 
   currentHeaderStyles = {};
   selectedControlId: string;
@@ -95,6 +96,7 @@ export class DetailsComponent implements OnInit {
       // Moving the All option to the top
       if (this.controlData.length > 1) {
         this.controlData.unshift(allControl);
+        this.selectedControl = this.setInitialDefault(this.controlData, allControl);
       }
     });
   }
@@ -108,11 +110,10 @@ export class DetailsComponent implements OnInit {
   onTitleChanged(event) {
     if(event.isUserInput) {
       this.selectedControlId = event.source.value;
-      console.log(this.selectedControlId);
 
         if (this.selectedControlId === '1') {
+          console.log(this.selectedControlId);
           console.log('Getting all the data'); 
-          console.log(this.controlData);
 
           this.caiqAssessmentDetails = []; 
 
@@ -134,6 +135,7 @@ export class DetailsComponent implements OnInit {
             }
           }
         } else {
+          console.log(this.selectedControlId);
           var filteredControlData = this.controlData.filter(x => x.control_id == this.selectedControlId);
           var filteredQuestions = filteredControlData[0].questions;
 
@@ -156,5 +158,9 @@ export class DetailsComponent implements OnInit {
           console.log(this.caiqAssessmentDetails);
         }
     }
+  }
+
+  setInitialDefault(controlData: Control[], allControl: Control): string {
+    return allControl.control_id;
   }
 }
