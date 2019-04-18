@@ -32,16 +32,16 @@ In order for you to get this code working in CodePen, please follow the below st
 1. Run `ng build --prod` this will enable a production build and all the build artifacts are stored in the `dist/angular-csa-information` directory.
 2. Navigate to CodePen.io - if you have an account already create a new project with the Basic HTML5 Structure. 
 3. Once the new project is created you want to just ensure that the `index.html` file is the only file that exists. Refer to the screenshot below:
-    ![Screenshot1](images\screenshot-codepen.io.png)
+    ![Screenshot1](images/screenshot-codepen.io.png)
 
 4. Previously in step 1, the result entails files that would reside in the folder `dist/angular-csa-information` directory. The directory should like something like the screenshot below: 
-   ![Screenshot2](images\dist-file-directory.png)
+   ![Screenshot2](images/dist-file-directory.png)
 
 5. From the screenshot in the previous step, select the following files: `index.html`, the CSS file, and the 3 JavaScript files. The file names for the CSS file and the JavaScripts are generated automatically by the CLI. Once you have selected the files, your screen should be similar to this: 
-   ![Screenshot3](images\file-selections.png)
+   ![Screenshot3](images/file-selections.png)
 
 6. Drag the selected files in Step 5 above, into the CodePen.io editor. You will get a warning if you want to overwrite the `index.html` file because it already existed. If that happens, select the option that would allow you to overwrite the `index.html` file. Your screen should now look like this: 
-   ![Screenshot4](images\codepen.io-postfileupload.png)
+   ![Screenshot4](images/codepen.io-postfileupload.png)
 
    A note that should be made - Anytime that changes are made to the app, and the command `ng build --prod` is executed, the names of the JavaScript and CSS files may change. 
 
